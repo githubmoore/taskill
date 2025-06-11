@@ -1,0 +1,47 @@
+[
+  {
+    "id": "coding-1",
+    "title": "Palindrome Checker",
+    "description": "Write a function to check if a given string is a palindrome (reads the same forwards and backwards, ignoring spaces, punctuation, and capitalization).",
+    "category": "Coding",
+    "timeLimit": 15,
+    "stars": 3,
+    "details": "Example: 'A man, a plan, a canal: Panama' is a palindrome. 'race a car' is not."
+  },
+  {
+    "id": "logic-1",
+    "title": "River Crossing Puzzle",
+    "description": "A farmer wants to cross a river with a wolf, a goat, and a cabbage. The boat can only carry the farmer and one item. If left unattended, the wolf will eat the goat, and the goat will eat the cabbage. How can the farmer get everything across safely?",
+    "category": "Logic",
+    "timeLimit": 5,
+    "stars": 2,
+    "details": "Describe the sequence of trips the farmer needs to make."
+  },
+  {
+    "id": "design-1",
+    "title": "Minimalist App Icon",
+    "description": "Design a minimalist app icon for a new productivity app called 'FlowState'. The icon should be simple, modern, and convey focus or efficiency.",
+    "category": "Design",
+    "timeLimit": 30,
+    "stars": 4,
+    "details": "Submit a short description of your design concept and a link to your visual (e.g., Imgur) or describe it textually."
+  },
+  {
+    "id": "coding-2",
+    "title": "FizzBuzz Extended",
+    "description": "Write a program that prints numbers from 1 to 100. For multiples of three, print 'Fizz' instead of the number. For multiples of five, print 'Buzz'. For numbers which are multiples of both three and five, print 'FizzBuzz'. Now, extend it: for multiples of seven, print 'Bang'. Combinations should also work (e.g., 21 is 'FizzBang').",
+    "category": "Coding",
+    "timeLimit": 30,
+    "stars": 4,
+    "details": "Output the sequence or a function that generates it."
+  },
+  {
+    "id": "logic-2",
+    "title": "Light Bulb Switch",
+    "description": "There are three switches outside a room and three light bulbs inside. You can flip the switches as much as you want, but you can only enter the room once. How do you determine which switch controls which bulb?",
+    "category": "Logic",
+    "timeLimit": 15,
+    "stars": 3,
+    "details": "Explain your method."
+  }
+]
