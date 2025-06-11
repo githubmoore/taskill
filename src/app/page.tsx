@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -58,7 +59,7 @@ export default function Home() {
         <div className="md:order-first">
           <h2 className="text-3xl font-headline font-semibold mb-4 text-primary">For Companies</h2>
           <p className="text-lg text-foreground mb-6">
-            Discover top talent based on proven skills, not just resumes. Post challenges, see candidates in action, and hire with confidence. It's fast, fair, and effective.
+            Post challenges, see candidates in action, and hire with confidence. It's fast, fair, and effective.
           </p>
           <ul className="space-y-3">
             <li className="flex items-center">
