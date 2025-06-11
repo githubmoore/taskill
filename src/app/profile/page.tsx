@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useUserProfile } from '@/hooks/useUserProfile';
@@ -11,6 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ProfilePage = () => {
   const { profile, loading, setLinkedInVerified, setWhatsAppVerified } = useUserProfile();
