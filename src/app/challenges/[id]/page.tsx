@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter }_ from 'next/navigation'; // Corrected import
+import { useParams, useRouter } from 'next/navigation'; // Corrected import
 import challengesData from '@/data/challenges.json';
 import type { Challenge } from '@/types';
 import { Button } from '@/components/ui/button';
