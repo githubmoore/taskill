@@ -1,4 +1,4 @@
-# OneTask MVP
+# OneTask
 
 ## Project Title
 
