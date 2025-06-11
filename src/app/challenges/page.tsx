@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -6,6 +7,7 @@ import ChallengeFilters from '@/components/challenge/ChallengeFilters';
 import type { Challenge } from '@/types';
 import challengesData from '@/data/challenges.json'; // Ensure this path is correct
 import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 
 const ChallengeHubPage = () => {
