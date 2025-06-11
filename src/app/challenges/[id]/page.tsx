@@ -1,7 +1,8 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation'; // Corrected import
+import { useParams, useRouter } from 'next/navigation';
 import challengesData from '@/data/challenges.json';
 import type { Challenge } from '@/types';
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CountdownTimer from '@/components/challenge/CountdownTimer';
 import { useCountdown } from '@/hooks/useCountdown';
 import { useUserProfile } from '@/hooks/useUserProfile';
-import { CheckCircle, Info, Star, TimerIcon, ChevronRight } from 'lucide-react';
+import { CheckCircle, Info, Star, TimerIcon, ChevronRight, Rocket, SendHorizonal } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 
@@ -23,6 +24,7 @@ const ChallengeDetailPage = () => {
   const [submission, setSubmission] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [challengeStarted, setChallengeStarted] = useState(false);
   
   const { completeChallenge } = useUserProfile();
 
@@ -42,16 +44,14 @@ const ChallengeDetailPage = () => {
       description: "The challenge time has expired. You can still submit, but no speed bonus will be awarded.",
       variant: "destructive",
     });
-    // Potentially auto-submit or disable submission here
   });
 
   const handleSubmit = () => {
     if (!challenge) return;
 
-    countdownControl.stop(); // Stop the timer on submission
+    countdownControl.stop();
     const timeElapsed = countdownControl.timeElapsedMinutes;
     
-    // Store submission temporarily for the feedback page
     if (typeof window !== 'undefined') {
       sessionStorage.setItem(`submission_${challenge.id}`, submission);
       sessionStorage.setItem(`challenge_desc_${challenge.id}`, challenge.description);
@@ -69,6 +69,12 @@ const ChallengeDetailPage = () => {
         </Button>
       ),
     });
+  };
+
+  const handleStartChallenge = () => {
+    if (!challenge) return;
+    setChallengeStarted(true);
+    countdownControl.start();
   };
 
   if (isLoading) {
@@ -102,27 +108,7 @@ const ChallengeDetailPage = () => {
             </Alert>
           )}
 
-          {!isSubmitted ? (
-            <>
-              <CountdownTimer 
-                initialMinutes={challenge.timeLimit} 
-                onTimeout={() => { /* Handled by hook */ }}
-                countdownControl={countdownControl}
-                autoStart={true}
-              />
-              <Textarea
-                placeholder="Enter your solution here..."
-                value={submission}
-                onChange={(e) => setSubmission(e.target.value)}
-                rows={10}
-                className="mb-4 focus:ring-primary focus:border-primary text-base"
-                disabled={!countdownControl.isActive && countdownControl.totalSeconds === 0}
-              />
-              <Button onClick={handleSubmit} size="lg" className="w-full" disabled={!submission.trim() || (!countdownControl.isActive && countdownControl.totalSeconds === 0)}>
-                Submit Solution
-              </Button>
-            </>
-          ) : (
+          {isSubmitted ? (
             <Alert variant="default" className="bg-green-50 border-green-300 text-green-700">
               <CheckCircle className="h-5 w-5 text-green-600" />
               <AlertTitle className="font-semibold">Challenge Submitted!</AlertTitle>
@@ -135,6 +121,37 @@ const ChallengeDetailPage = () => {
                 </Button>
               </AlertDescription>
             </Alert>
+          ) : !challengeStarted ? (
+            <div className="text-center py-6 space-y-4">
+              <Alert variant="default" className="bg-secondary/30 text-left">
+                <Info className="h-4 w-4" />
+                <AlertTitle className="font-semibold">Ready to Begin?</AlertTitle>
+                <AlertDescription>
+                  You have <strong>{challenge.timeLimit} minutes</strong> to complete this challenge. Once you click "Start Challenge", the timer will begin. Good luck!
+                </AlertDescription>
+              </Alert>
+              <Button onClick={handleStartChallenge} size="lg" className="w-full group">
+                <Rocket className="mr-2 h-5 w-5 group-hover:animate-bounce" /> Start Challenge
+              </Button>
+            </div>
+          ) : (
+            <>
+              <CountdownTimer 
+                countdownControl={countdownControl}
+                autoStart={false} 
+              />
+              <Textarea
+                placeholder="Enter your solution here..."
+                value={submission}
+                onChange={(e) => setSubmission(e.target.value)}
+                rows={10}
+                className="mb-4 focus:ring-primary focus:border-primary text-base"
+                disabled={!countdownControl.isActive && countdownControl.totalSeconds === 0}
+              />
+              <Button onClick={handleSubmit} size="lg" className="w-full group" disabled={!submission.trim() || (!countdownControl.isActive && countdownControl.totalSeconds === 0)}>
+                <SendHorizonal className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" /> Submit Solution
+              </Button>
+            </>
           )}
         </CardContent>
       </Card>
